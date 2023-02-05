@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/Constantes/global_variaveis.dart';
+import 'package:flutter_ecommerce/comumn/widgets/custom_buttom.dart';
 import 'package:flutter_ecommerce/comumn/widgets/custom_textfield.dart';
 
 enum Auth {
@@ -40,6 +41,7 @@ class AuthScreenState extends State<AuthScreen> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Text(
                   'Bem vindo a nossa loja',
@@ -49,6 +51,9 @@ class AuthScreenState extends State<AuthScreen> {
                   ),
                 ),
                 ListTile(
+                  tileColor: _auth == Auth.signup
+                      ? GlobalVariaveis.backgroundColor
+                      : GlobalVariaveis.greyBackgroundCOlor,
                   title: const Text(
                     'Crie sua conta',
                     style: TextStyle(
@@ -67,13 +72,30 @@ class AuthScreenState extends State<AuthScreen> {
                   ),
                 ),
                 if (_auth == Auth.signup)
-                  Form(
-                    key: _signUpFormKey,
-                    child: Column(
-                      children: [
-                        CustomTextField(
-                            controller: _emailController, hintText: 'Email')
-                      ],
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    color: GlobalVariaveis.backgroundColor,
+                    child: Form(
+                      key: _signUpFormKey,
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 10),
+                          CustomTextField(
+                              controller: _nameController, hintText: 'Nome'),
+                          const SizedBox(height: 10),
+                          CustomTextField(
+                              controller: _emailController, hintText: 'Email'),
+                          const SizedBox(height: 10),
+                          CustomTextField(
+                              controller: _passwordController,
+                              hintText: 'Senha'),
+                          const SizedBox(height: 10),
+                          CustomButtom(
+                            text: 'Criar Conta',
+                            onTap: () {},
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ListTile(
@@ -94,6 +116,30 @@ class AuthScreenState extends State<AuthScreen> {
                     },
                   ),
                 ),
+                if (_auth == Auth.signin)
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    color: GlobalVariaveis.backgroundColor,
+                    child: Form(
+                      key: _signInFormKey,
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 10),
+                          CustomTextField(
+                              controller: _emailController, hintText: 'Email'),
+                          const SizedBox(height: 10),
+                          CustomTextField(
+                              controller: _passwordController,
+                              hintText: 'Senha'),
+                          const SizedBox(height: 10),
+                          CustomButtom(
+                            text: 'Entrar na Conta',
+                            onTap: () {},
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
               ],
             ),
           ),
