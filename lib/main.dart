@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushNamed(context, AuthScreen.routeName);
                   },
-                  child: const Text('Click'));
+                  child: Text('Click'));
             })
           ],
         ),
