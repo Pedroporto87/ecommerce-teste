@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/Constantes/global_variaveis.dart';
+import 'package:flutter_ecommerce/comumn/widgets/custom_textfield.dart';
 
 enum Auth {
   signin,
@@ -18,6 +19,18 @@ class AuthScreenState extends State<AuthScreen> {
   Auth _auth = Auth.signup;
   final _signUpFormKey = GlobalKey<FormState>();
   final _signInFormKey = GlobalKey<FormState>();
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _nameController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +69,12 @@ class AuthScreenState extends State<AuthScreen> {
                 if (_auth == Auth.signup)
                   Form(
                     key: _signUpFormKey,
-                    child: Column(),
+                    child: Column(
+                      children: [
+                        CustomTextField(
+                            controller: _emailController, hintText: 'Email')
+                      ],
+                    ),
                   ),
                 ListTile(
                   title: const Text(
