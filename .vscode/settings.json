@@ -1,0 +1,8 @@
+{
+    "prettier.configPath": "\"[dart]\": { \"editor.defaultFormatter\": \"Dart-Code.dart-code\" },   \"editor.formatOnSave\": true",
+    "prettier.enableDebugLogs": true,
+    "prettier.withNodeModules": true,
+    "prettier.useEditorConfig": true,
+    "[dart]": { "editor.defaultFormatter": "Dart-Code.dart-code" },
+    "editor.formatOnSave": true
+  }
