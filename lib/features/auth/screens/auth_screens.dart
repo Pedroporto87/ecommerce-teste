@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ecommerce/Constantes/global_variaveis.dart';
 import 'package:flutter_ecommerce/comumn/widgets/custom_buttom.dart';
 import 'package:flutter_ecommerce/comumn/widgets/custom_textfield.dart';
+import 'package:flutter_ecommerce/services/auth_services.dart';
+
 
 enum Auth {
   signin,
@@ -13,23 +15,28 @@ class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
 
   @override
-  State<AuthScreen> createState() => AuthScreenState();
+  State<AuthScreen> createState() => _AuthScreenState();
 }
 
-class AuthScreenState extends State<AuthScreen> {
+class _AuthScreenState extends State<AuthScreen> {
   Auth _auth = Auth.signup;
   final _signUpFormKey = GlobalKey<FormState>();
   final _signInFormKey = GlobalKey<FormState>();
-
+  final AuthService authService = AuthService();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
+  
   @override
   void dispose() {
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     _nameController.dispose();
+  }
+
+  void signUpUser() {
+  authService.signUpUser(context: context, email: _emailController.text, password: _passwordController.text, name: _nameController.text,);
   }
 
   @override
@@ -92,7 +99,11 @@ class AuthScreenState extends State<AuthScreen> {
                           const SizedBox(height: 10),
                           CustomButtom(
                             text: 'Criar Conta',
-                            onTap: () {},
+                            onTap: () {
+                              if( _signUpFormKey.currentState!.validate()){
+                                signUpUser();
+                              }
+                            },
                           ),
                         ],
                       ),

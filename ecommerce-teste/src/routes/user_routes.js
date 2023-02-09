@@ -25,7 +25,7 @@ myRouter.post("/createaccount", async function (req, res) {
   const newUser = new userModel(userData);
   await newUser.save((err) => {
     if (err) {
-      res.json({ success: false, error: err });
+      res.status(400).json({ success: false, error: err });
       return;
     }
     res.json({ success: true, data: newUser });
