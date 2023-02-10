@@ -1,6 +1,7 @@
 import express from "express";
 import userModel from "../models/user_models.js";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const myRouter = express.Router();
 
@@ -25,7 +26,7 @@ myRouter.post("/createaccount", async function (req, res) {
   const newUser = new userModel(userData);
   await newUser.save((err) => {
     if (err) {
-      res.status(400).json({ success: false, error: err });
+      res.json({ success: false, error: err });
       return;
     }
     res.json({ success: true, data: newUser });
@@ -46,6 +47,8 @@ myRouter.post("/login", async function (req, res) {
     res.json({ sucess: false, error: "Senha Incorreta" });
     return;
   }
+  //const token = jwt.sign({ id: userData.id }, "passwordKey");
+  //res.json({ token, ...user._doc });
   res.json({ sucess: true, data: foundUser });
 });
 
